@@ -130,7 +130,7 @@ Results are displayed as bar charts comparing GCN, GAT, and GraphSAGE side by si
 
 ## Author
 
-**Christina Barefoo**  
+**Christina Barefoot**  
 B.S. Cybersecurity and Operations | Mississippi State University  
 [LinkedIn](www.linkedin.com/in/christina-barefoot) · [GitHub](https://github.com/Stinafoot)
 
