@@ -48,7 +48,7 @@ Each dataset uses an **independent StandardScaler** fit on its own data. This te
 
 ## Results
 
-### NSL-KDD - In-Distribution
+### NSL-KDD: In-Distribution
 
 | Model | Accuracy | F1 | Precision | Recall | ROC-AUC |
 |---|---|---|---|---|---|
@@ -59,7 +59,7 @@ Each dataset uses an **independent StandardScaler** fit on its own data. This te
 | GIN | 0.8651 | 0.8490 | 0.8859 | **0.8150** | 0.9250 |
 | ChebNet | **0.8995** | **0.8809** | **0.9822** | 0.7986 | 0.9338 |
 
-### CICIDS2017 - Cross-Dataset
+### CICIDS2017: Cross-Dataset
 
 | Model | Accuracy | F1 | Precision | Recall | ROC-AUC |
 |---|---|---|---|---|---|
@@ -72,7 +72,7 @@ Each dataset uses an **independent StandardScaler** fit on its own data. This te
 
 †GCN AUC=0.827 confirms discriminative ability - low accuracy reflects class-distribution shift (NSL-KDD 53% attack → CICIDS 96% attack) causing threshold miscalibration, not model failure.
 
-### UNSW-NB15 - Cross-Dataset (optimal threshold)
+### UNSW-NB15: Cross-Dataset (optimal threshold)
 
 | Model | Accuracy | F1 | Precision | Recall | ROC-AUC | Threshold |
 |---|---|---|---|---|---|---|
