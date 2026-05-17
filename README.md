@@ -16,9 +16,9 @@ This project investigates how well Graph Neural Network (GNN) models generalize 
 
 | Architecture | Description |
 |---|---|
-| **GCN** | Graph Convolutional Network — aggregates neighbor features via spectral convolution |
-| **GAT** | Graph Attention Network — uses attention weights to prioritize relevant neighbors |
-| **GraphSAGE** | Inductive learning via neighborhood sampling — generalizes to unseen nodes |
+| **GCN** | Graph Convolutional Network - aggregates neighbor features via spectral convolution |
+| **GAT** | Graph Attention Network - uses attention weights to prioritize relevant neighbors |
+| **GraphSAGE** | Inductive learning via neighborhood sampling - generalizes to unseen nodes |
 
 All models share the same architecture template:
 - Input layer → Hidden layer (64 units) → Output layer (2 classes: Normal / Attack)
