@@ -1,12 +1,12 @@
 # GNN-Based Network Intrusion Detection: Cross-Dataset Evaluation
 
-> Evaluating six Graph Neural Network architectures for network intrusion detection across NSL-KDD, UNSW-NB15, and CICIDS2017 — with emphasis on cross-dataset generalization.
+> Evaluating six Graph Neural Network architectures for network intrusion detection across NSL-KDD, UNSW-NB15, and CICIDS2017 with emphasis on cross-dataset generalization.
 
 ---
 
 ## Overview
 
-This project investigates how well Graph Neural Network (GNN) models generalize across different network intrusion detection benchmark datasets. Six architectures are trained on NSL-KDD and evaluated on UNSW-NB15 and CICIDS2017 to assess cross-dataset robustness — a critical but often overlooked aspect of real-world intrusion detection system (IDS) deployment.
+This project investigates how well Graph Neural Network (GNN) models generalize across different network intrusion detection benchmark datasets. Six architectures are trained on NSL-KDD and evaluated on UNSW-NB15 and CICIDS2017 to assess cross-dataset robustness which is a critical but often overlooked aspect of real-world intrusion detection system (IDS) deployment.
 
 A key finding of this study: **in-distribution accuracy does not reliably predict cross-dataset performance.** All six models achieve 0.75–0.90 on NSL-KDD, but generalization varies significantly, with more expressive architectures (RGCN, GIN, ChebNet) outperforming spectral baselines (GCN) on unseen traffic distributions.
 
@@ -18,12 +18,12 @@ A key finding of this study: **in-distribution accuracy does not reliably predic
 
 | Architecture | Type | Key Characteristic |
 |---|---|---|
-| **GCN** | Spectral | Normalized adjacency convolution — fast baseline |
+| **GCN** | Spectral | Normalized adjacency convolution - fast baseline |
 | **GAT** | Attention | Learned attention weights over neighbors (4 heads) |
-| **GraphSAGE** | Inductive | Neighborhood sampling — designed for unseen nodes |
+| **GraphSAGE** | Inductive | Neighborhood sampling - designed for unseen nodes |
 | **R-GCN** | Relational | Relation-typed edges; homogeneous mode (1 relation) |
-| **GIN** | Expressive | Injective MLP aggregator — maximally expressive under 1-WL test |
-| **ChebNet** | Spectral | K=3 Chebyshev polynomial filters — captures 3-hop context per layer |
+| **GIN** | Expressive | Injective MLP aggregator - maximally expressive under 1-WL test |
+| **ChebNet** | Spectral | K=3 Chebyshev polynomial filters - captures 3-hop context per layer |
 
 All models share the same training template:
 - Input (8 features) → Hidden layer (64 units) → Output (2 classes: Normal / Attack)
@@ -42,7 +42,7 @@ All models share the same training template:
 | **UNSW-NB15** | Evaluation | Modern synthetic traffic with 9 attack categories. ~175k flows, ~46% attack. |
 | **CICIDS2017** | Evaluation | Realistic lab-captured attack scenarios (PortScan file). ~286k flows, ~96% attack. |
 
-Each dataset is independently normalized with its own `StandardScaler`. This tests whether the **learned graph structure and weights transfer** across datasets — not whether raw feature scales do — which is the correct methodology for cross-dataset GNN evaluation.
+Each dataset is independently normalized with its own `StandardScaler`. This tests whether the **learned graph structure and weights transfer** across datasets and not whether raw feature scales do which is the correct methodology for cross-dataset GNN evaluation.
 
 ---
 
@@ -79,7 +79,7 @@ gnn-intrusion-detection/
 ├── gnn_model_gin.pt                # Saved GIN weights
 ├── gnn_model_cheb.pt               # Saved ChebNet weights
 │
-├── data/                           # Place dataset CSVs here (not tracked — see below)
+├── data/                           # Place dataset CSVs here (not tracked see below)
 │   ├── KDDTrain+.txt
 │   ├── UNSW_NB15_testing-set.csv
 │   └── Friday-WorkingHours-Afternoon-PortScan.pcap_ISCX.csv
@@ -114,7 +114,7 @@ Download and place in the project root (or update the file paths in each noteboo
 
 ## How to Run
 
-Run notebooks **in order** — Notebook 01 must complete before 02 or 03:
+Run notebooks **in order** - Notebook 01 must complete before 02 or 03:
 
 ```
 1. 01_NSLKDDCoreTraining.ipynb
@@ -135,11 +135,11 @@ Each eval notebook fits its own `StandardScaler` independently and prints a feat
 
 Each model is evaluated on:
 
-- **Accuracy** — overall correct predictions
-- **Precision** — of predicted attacks, how many were real attacks
-- **Recall** — of real attacks, how many were detected
-- **F1-Score** — harmonic mean of precision and recall
-- **ROC-AUC** — threshold-independent ranking quality (most reliable metric for cross-dataset comparison)
+- **Accuracy** - overall correct predictions
+- **Precision** - of predicted attacks, how many were real attacks
+- **Recall** - of real attacks, how many were detected
+- **F1-Score** - harmonic mean of precision and recall
+- **ROC-AUC** - threshold-independent ranking quality (most reliable metric for cross-dataset comparison)
 
 Results are displayed as bar charts comparing all 6 architectures side by side per dataset.
 
@@ -149,9 +149,9 @@ Results are displayed as bar charts comparing all 6 architectures side by side p
 
 | Result | Detail |
 |---|---|
-| Best in-distribution (NSL-KDD) | SAGE / RGCN / ChebNet — ~0.90 accuracy, precision >0.98 |
-| Best recall balance | GIN — 0.865 accuracy with lowest false-negative rate |
-| Best cross-dataset (CICIDS2017) | RGCN — 0.915 accuracy / 0.929 F1 |
+| Best in-distribution (NSL-KDD) | SAGE / RGCN / ChebNet - ~0.90 accuracy, precision >0.98 |
+| Best recall balance | GIN - 0.865 accuracy with lowest false-negative rate |
+| Best cross-dataset (CICIDS2017) | RGCN - 0.915 accuracy / 0.929 F1 |
 | GCN distribution-shift failure | ROC-AUC 0.83 but predicts nearly all flows as normal on CICIDS (96% attack file vs 53% NSL-KDD) |
 | Bidirectional edges impact | GCN in-distribution accuracy: 0.59 → 0.75 after adding reverse edges |
 | UNSW label ambiguity | Labels derived from `attack_cat` column to avoid encoding inconsistencies across file versions |
