@@ -22,12 +22,12 @@ Comparing six Graph Neural Network architectures for binary network intrusion de
 
 | Architecture | Type | Key Characteristic |
 |---|---|---|
-| **GCN** | Spectral | Normalized adjacency convolution — fast baseline |
+| **GCN** | Spectral | Normalized adjacency convolution - fast baseline |
 | **GAT** | Attention | Learned attention weights over neighbors (4 heads) |
-| **GraphSAGE** | Inductive | Neighborhood sampling — designed for unseen nodes |
+| **GraphSAGE** | Inductive | Neighborhood sampling - designed for unseen nodes |
 | **R-GCN** | Relational | Relation-typed edges; homogeneous mode (1 relation) |
-| **GIN** | Expressive | Injective MLP aggregator — maximally expressive under 1-WL test |
-| **ChebNet** | Spectral | K=3 Chebyshev polynomial filters — captures 3-hop context per layer |
+| **GIN** | Expressive | Injective MLP aggregator - maximally expressive under 1-WL test |
+| **ChebNet** | Spectral | K=3 Chebyshev polynomial filters - captures 3-hop context per layer |
 
 ### Shared Training Configuration
 
@@ -81,7 +81,7 @@ Eight semantically aligned features extracted consistently across all three data
 
 ## Results
 
-### NSL-KDD — In-Distribution Test
+### NSL-KDD: In-Distribution Test
 
 | Model | Accuracy | F1 | Precision | Recall | ROC-AUC |
 |---|---|---|---|---|---|
@@ -92,7 +92,7 @@ Eight semantically aligned features extracted consistently across all three data
 | GIN | 0.8651 | 0.8490 | 0.8859 | **0.8150** | 0.9250 |
 | ChebNet | **0.8995** | **0.8809** | **0.9822** | 0.7986 | 0.9338 |
 
-### CICIDS2017 — Cross-Dataset
+### CICIDS2017: Cross-Dataset
 
 | Model | Accuracy | F1 | Precision | Recall | ROC-AUC |
 |---|---|---|---|---|---|
@@ -103,9 +103,9 @@ Eight semantically aligned features extracted consistently across all three data
 | GIN | 0.8962 | 0.9133 | 0.8513 | 0.9849 | 0.8700 |
 | ChebNet | 0.8967 | 0.9147 | 0.8440 | **0.9983** | 0.8589 |
 
-†GCN's ROC-AUC of 0.827 confirms discriminative ability is intact. The near-zero accuracy reflects class-distribution shift (NSL-KDD 53% attack → CICIDS 96% attack) causing threshold miscalibration — a calibration problem, not a representation problem.
+†GCN's ROC-AUC of 0.827 confirms discriminative ability is intact. The near-zero accuracy reflects class-distribution shift (NSL-KDD 53% attack → CICIDS 96% attack) causing threshold miscalibration - a calibration problem, not a representation problem.
 
-### UNSW-NB15 — Cross-Dataset (Optimal Threshold)
+### UNSW-NB15: Cross-Dataset (Optimal Threshold)
 
 | Model | Accuracy | F1 | Precision | Recall | ROC-AUC | Threshold |
 |---|---|---|---|---|---|---|
@@ -122,11 +122,11 @@ Optimal threshold is found per model by sweeping 0.05–0.95 and maximizing F1. 
 
 ## Key Findings
 
-**1. In-distribution (NSL-KDD):** GraphSAGE, R-GCN, and ChebNet lead at ~0.90 accuracy and AUC above 0.93. GIN achieves the best recall balance (0.815) making it the lowest false-negative architecture — the most important property in a security context. GCN improved substantially (0.59→0.75) after switching to bidirectional sequential edges, confirming that graph construction is as important as architecture choice.
+**1. In-distribution (NSL-KDD):** GraphSAGE, R-GCN, and ChebNet lead at ~0.90 accuracy and AUC above 0.93. GIN achieves the best recall balance (0.815) making it the lowest false-negative architecture - the most important property in a security context. GCN improved substantially (0.59→0.75) after switching to bidirectional sequential edges, confirming that graph construction is as important as architecture choice.
 
-**2. CICIDS2017 cross-dataset:** R-GCN achieves the best overall transfer (accuracy 0.915, F1 0.929). GIN and ChebNet follow closely at ~0.896–0.897. GCN's collapse to near-zero F1 is a threshold calibration failure, not a representation failure — its ROC-AUC of 0.827 proves it can still separate classes. The NSL-KDD majority-class decision boundary simply does not cover CICIDS traffic at the default 0.5 threshold.
+**2. CICIDS2017 cross-dataset:** R-GCN achieves the best overall transfer (accuracy 0.915, F1 0.929). GIN and ChebNet follow closely at ~0.896–0.897. GCN's collapse to near-zero F1 is a threshold calibration failure, not a representation failure - its ROC-AUC of 0.827 proves it can still separate classes. The NSL-KDD majority-class decision boundary simply does not cover CICIDS traffic at the default 0.5 threshold.
 
-**3. UNSW-NB15 cross-dataset:** GAT achieves the best ROC-AUC (0.715), competitive with published cross-dataset IDS baselines (~0.65–0.75 from E-GraphSAGE). The universal probability-inversion flag across all models indicates UNSW attack traffic is statistically unlike NSL-KDD attack traffic — models trained on 1999-era data assign higher anomaly confidence to modern normal traffic. This is an expected and meaningful finding about temporal distribution shift in network security datasets.
+**3. UNSW-NB15 cross-dataset:** GAT achieves the best ROC-AUC (0.715), competitive with published cross-dataset IDS baselines (~0.65–0.75 from E-GraphSAGE). The universal probability-inversion flag across all models indicates UNSW attack traffic is statistically unlike NSL-KDD attack traffic - models trained on 1999-era data assign higher anomaly confidence to modern normal traffic. This is an expected and meaningful finding about temporal distribution shift in network security datasets.
 
 **4. ROC-AUC as primary metric:** When attack rates differ substantially between training and evaluation sets (53% vs 68% vs 96%), threshold-dependent metrics such as accuracy and F1 can be highly misleading. ROC-AUC is the correct primary metric for cross-dataset evaluation because it is threshold-independent.
 
@@ -175,7 +175,7 @@ pip install torch torch-geometric pandas numpy scikit-learn matplotlib joblib py
 
 ## How to Run
 
-Notebooks must be run in order — Notebook 01 trains and saves all model weights:
+Notebooks must be run in order - Notebook 01 trains and saves all model weights:
 
 ```bash
 # Step 1: Train all 6 GNN architectures on NSL-KDD
@@ -215,11 +215,11 @@ Notebook 03 includes diagnostic output of all label-related columns and a hard s
 ## .gitignore
 
 ```gitignore
-# Large binary files — regenerate by running the notebooks
+# Large binary files - regenerate by running the notebooks
 *.pt
 ids_scaler.pkl
 
-# Datasets — download separately per license terms
+# Datasets - download separately per license terms
 data/
 
 # Python
